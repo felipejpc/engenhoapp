@@ -11,6 +11,13 @@
   </thead>
 
   <tbody>
+  <% blogpost = contentful.entries(content_type: ENV['blogPost'], include: 2) %>
+  <% blogpost.each do |post| %>
+      <div class="contentful_blogpost">
+        <h1><%= post.title %></h1>
+      </div>
+  <% end %>
+
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
