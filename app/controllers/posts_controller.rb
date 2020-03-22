@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
   layout 'blog'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  require 'contentful'
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @contentful_posts = contentful.entries(content_type: 'blogPost', include: 2)
   end
 
   # GET /posts/1
@@ -71,5 +72,12 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title)
+    end
+
+    def contentful
+      @client = Contentful::Client.new(
+          access_token: 'pGry8uBgtxMqy8Hhsk12sGDOsqWpnDc4DliWHpXuQ8w',
+          space: 'h0hn2pnr1nct'
+      )
     end
 end
