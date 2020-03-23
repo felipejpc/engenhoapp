@@ -4,6 +4,25 @@
 <div class="blog-posts">
   <div class="col-md-12">
     <div class="row list-dashed">
+      <% @contentful_posts.each do |post| %>
+          <% case post.post_type.content_type.id %>
+          <% when 'galeryPost' %>
+              <p>Galery Post</p>
+          <% when 'imagesCarouselPost' %>
+              <p>Carousel Post</p>
+          <% when 'quotationPost' %>
+              <p>Quotation Post</p>
+          <% when 'singleImagePost' %>
+              <p>Single Image Post</p>
+          <% when 'soundPost' %>
+              <p>Sound Post</p>
+          <% when 'textPost' %>
+              <p>Text Post</p>
+          <% when 'videopostPost' %>
+              <p>Video Post</p>
+          <% end %>
+      <% end %>
+
       <article class="post clearfix mb-50 pb-30">
         <div class="entry-header">
           <div class="post-thumb"> <img alt="" src="https://placehold.it/900x500" class="img-fullwidth img-responsive"> </div>
@@ -273,3 +292,22 @@
     </nav>
   </div>
 </div>
+
+<h1>Posts</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @contentful_posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
