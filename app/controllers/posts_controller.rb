@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   layout 'blog'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  require 'contentful'
+  before_action do
+    contentful_layout('Blog Standard Layout')
+  end
 
   # GET /posts
   # GET /posts.json
@@ -74,10 +76,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title)
     end
 
-    def contentful
-      @client = Contentful::Client.new(
-          access_token: 'pGry8uBgtxMqy8Hhsk12sGDOsqWpnDc4DliWHpXuQ8w',
-          space: 'h0hn2pnr1nct'
-      )
+    def contentful_layout(layout)
+      @contentful_layout = contentful.entries('content_type' => 'blogLayout', 'include' => 4, 'fields.name' => layout)
     end
 end
