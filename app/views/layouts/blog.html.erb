@@ -209,7 +209,7 @@
                 </div>
               </div>
               <div class="widget">
-                <h5 class="widget-title line-bottom">Latest News</h5>
+                <h5 class="widget-title line-bottom">Post Populares</h5>
                 <div class="latest-posts">
                   <article class="post media-post clearfix pb-0 mb-10">
                     <a class="post-thumb" href="#"><img src="https://placehold.it/75x75" alt=""></a>
@@ -237,16 +237,9 @@
               <div class="widget">
                 <h5 class="widget-title line-bottom">Tags</h5>
                 <div class="tags">
-                  <a href="#">travel</a>
-                  <a href="#">blog</a>
-                  <a href="#">lifestyle</a>
-                  <a href="#">feature</a>
-                  <a href="#">mountain</a>
-                  <a href="#">design</a>
-                  <a href="#">restaurant</a>
-                  <a href="#">journey</a>
-                  <a href="#">classic</a>
-                  <a href="#">sunset</a>
+                  <% @all_post_tags.each do |post_tag| %>
+                  <a href="/posts?tag=<%=post_tag.tag%>"><%= post_tag.tag %></a>
+                  <% end %>
                 </div>
               </div>
             </div>

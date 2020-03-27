@@ -4,11 +4,26 @@ class PostsController < ApplicationController
   before_action do
     contentful_layout('Blog Standard Layout')
   end
+  before_action :all_tags
 
   # GET /posts
   # GET /posts.json
   def index
-    @contentful_posts = contentful.entries(content_type: 'blogPost', include: 2)
+    if params[:tag].present?
+      posts = contentful.entries(content_type: 'blogPost', include: 2)
+      posts_with_tag = []
+      posts.each do |post|
+        post.tags.each do |tag|
+          if tag.tag == params[:tag]
+            posts_with_tag << post
+            break
+          end
+        end
+      end
+      @contentful_posts = posts_with_tag
+    else
+      @contentful_posts = contentful.entries(content_type: 'blogPost', include: 2)
+    end
   end
 
   # GET /posts/1
@@ -78,5 +93,9 @@ class PostsController < ApplicationController
 
     def contentful_layout(layout)
       @contentful_layout = contentful.entries('content_type' => 'blogLayout', 'include' => 4, 'fields.name' => layout)
+    end
+
+    def all_tags
+      @all_post_tags = contentful.entries(content_type: 'postTag', include: 2)
     end
 end
