@@ -41,11 +41,6 @@ class PostsController < ApplicationController
       @post = Post.find_by!(slug: params[:slug])
     end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title)
-    end
-
     def contentful_layout(layout)
       @contentful_layout = contentful.entries('content_type' => 'blogLayout', 'include' => 4, 'fields.name' => layout)
     end
