@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_151303) do
+ActiveRecord::Schema.define(version: 2020_03_29_144250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,18 @@ ActiveRecord::Schema.define(version: 2020_03_19_151303) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.text "description"
+    t.string "content_id"
+    t.index ["content_id"], name: "index_posts_on_content_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "syncs", force: :cascade do |t|
+    t.string "content_type"
+    t.string "sync_type"
+    t.string "sync_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

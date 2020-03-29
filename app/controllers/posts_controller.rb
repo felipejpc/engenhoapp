@@ -9,6 +9,10 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    # iterate over all content because contentful restriction.
+    # only search on references on fields which link to a single entry.
+    # Fields which hold references to many entries or fields with references to assets are not supported.
+    # See https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/localization
     if params[:tag].present?
       posts = contentful.entries(content_type: 'blogPost', include: 2)
       posts_with_tag = []
