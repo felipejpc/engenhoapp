@@ -38,7 +38,8 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find_by!(slug: params[:slug])
+      post_in_local_db = Post.find_by!(slug: params[:slug])
+      @contentful_post = contentful.entries('sys.id' => post_in_local_db.content_id).first
     end
 
     def contentful_layout(layout)
