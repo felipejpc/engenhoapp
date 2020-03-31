@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   layout 'blog'
   before_action :set_post, only: [:show]
+  # before_action :related_posts, only: [:show]
   before_action do
     contentful_layout('Blog Standard Layout')
   end
   before_action :all_tags
+  before_action :highlighted_posts
 
   # GET /posts
   # GET /posts.json
@@ -49,4 +51,29 @@ class PostsController < ApplicationController
     def all_tags
       @all_post_tags = contentful.entries(content_type: 'postTag', include: 2)
     end
+
+    def highlighted_posts
+      entries = contentful.entries(content_type: 'highlightedPosts', include: 2)
+      @highlighted_posts = entries[0].posts
+    end
+
+    # def related_posts
+    #   # @related_posts =
+    #   tags = []
+    #   @contentful_post.tags.each do |tag|
+    #     tags << tag.tag
+    #   end
+    #   binding.pry
+    #
+    #   posts = contentful.entries(content_type: 'blogPost', include: 2)
+    #   posts_with_tags = []
+    #   posts.each do |post|
+    #     post.tags.each do |tag|
+    #       if tag.tag == params[:tag]
+    #         posts_with_tags << post
+    #         break
+    #       end
+    #     end
+    #   end
+    # end
 end
