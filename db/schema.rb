@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_144250) do
+ActiveRecord::Schema.define(version: 2020_03_31_124337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,14 @@ ActiveRecord::Schema.define(version: 2020_03_29_144250) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.text "description"
-    t.string "content_id"
-    t.index ["content_id"], name: "index_posts_on_content_id", unique: true
+    t.string "contentful_id"
+    t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.string "tag_id"
+    t.string "post_id"
   end
 
   create_table "syncs", force: :cascade do |t|
@@ -32,6 +37,14 @@ ActiveRecord::Schema.define(version: 2020_03_29_144250) do
     t.string "sync_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "contentful_id"
+    t.string "tag_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contentful_id"], name: "index_tags_on_contentful_id"
   end
 
 end
