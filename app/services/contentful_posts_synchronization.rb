@@ -1,4 +1,4 @@
-class ContentfulSynchronization
+class ContentfulPostsSynchronization
   require 'contentful'
 
   @@client = Contentful::Client.new(
