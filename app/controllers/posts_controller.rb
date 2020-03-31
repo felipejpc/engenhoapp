@@ -58,7 +58,6 @@ class PostsController < ApplicationController
     end
 
     def related_posts
-      binding.pry
-      #Post.tags.where()
+      @related_posts = Post.joins(:tags).where(posts_tags: { tag_id: ['wRICHRSrcslBSjSsjQ1XZ'] })
     end
 end
