@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_124337) do
+ActiveRecord::Schema.define(version: 2020_04_01_095014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_124337) do
     t.string "slug"
     t.text "description"
     t.string "contentful_id"
+    t.string "thumb_image"
     t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end

@@ -3,7 +3,8 @@
   <div class="latest-posts">
     <% @highlighted_posts.each do |post| %>
     <article class="post media-post clearfix pb-0 mb-10">
-      <a class="post-thumb" href="#"><img src="https://placehold.it/75x75" alt=""></a>
+      <!-- TODO Insert an Alternative in image assets contentful. Required field -->
+      <a class="post-thumb" href=<%= "/posts/#{post.slug}" %>><img src=<%= post.thumb_image.url %> alt=""></a>
       <div class="post-right">
         <h5 class="post-title mt-0"><%= link_to post.title, "/posts/#{post.slug}" %></h5>
         <p><%= "#{post.description[0, 60]}[...]" %></p>
