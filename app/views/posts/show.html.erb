@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="entry-title pt-0">
-      <h3><a href="#">Different types of stroke</a></h3>
+      <h3><%= @contentful_post.title %></h3>
     </div>
     <div class="entry-meta">
       <ul class="list-inline">
@@ -23,13 +23,7 @@
       </ul>
     </div>
     <div class="entry-content mt-10">
-      <p class="mb-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p class="mb-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <blockquote class="theme-colored pt-20 pb-20">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <%= @contentful_post.post_type.body %>
       <div class="mt-30 mb-0">
         <h5 class="pull-left mt-10 mr-20 text-theme-colored">Share:</h5>
         <ul class="social-icons icon-circled m-0">
@@ -148,10 +142,3 @@
     </div>
   </div>
 </div>
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
