@@ -57,7 +57,11 @@ class PostsController < ApplicationController
       @highlighted_posts = entries[0].posts
     end
 
+    # TODO Order by popularity (higher view counts)
     def related_posts
-      @related_posts = Post.joins(:tags).where(posts_tags: { tag_id: ['wRICHRSrcslBSjSsjQ1XZ'] })
+      reference_post_tags = Post.find_by(slug: params[:slug]).tags
+      contentful_tags_id_array = []
+      reference_post_tags.each { |tag| contentful_tags_id_array << tag.contentful_id }
+      @related_posts = Post.joins(:tags).distinct.where(posts_tags: { tag_id: contentful_tags_id_array }).limit(5)
     end
 end
