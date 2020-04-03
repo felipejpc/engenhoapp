@@ -110,56 +110,8 @@
     <div class="header-nav">
       <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest">
         <div class="container">
-          <nav id="menuzord-right" class="menuzord blue bg-lightest">
-            <a class="menuzord-brand pull-left flip" href="javascript:void(0)">
-              <!-- TODO To include logo into contentful model -->
-              <%= image_tag 'logo-wide.png' %>
-            </a>
-            <% unless @contentful_layout.nil? %>
-            <ul class="menuzord-menu">
-              <% @contentful_layout[0].menu_items.each do |menuitem| %>
-              <li><a <% if menuitem.fields.key?(:url) %>
-                     href=<%= menuitem.url %>>
-                     <% elsif menuitem.fields.key?(:reference) %>
-                     href=<%= menuitem.reference.slug %>>
-                     <% else %>
-                     >
-                     <% end %>
-                    <%= menuitem.title %></a>
-                <% if menuitem.fields.key?(:level1) %>
-                <ul class="dropdown">
-                  <% menuitem.level1.each do |level1| %>
-                  <li><a <% if level1.fields.key?(:url) %>
-                         href=<%= level1.url %>>
-                         <% elsif level1.fields.key?(:reference) %>
-                         href=<%= level1.reference.slug %>>
-                         <% else %>
-                         >
-                         <% end %>
-                         <%= level1.title %></a>
-                    <% if level1.fields.key?(:level2) %>
-                    <ul class="dropdown">
-                      <% level1.level2.each do |level2| %>
-                      <li><a <% if level2.fields.key?(:url) %>
-                             href=<%= level2.url %>>
-                             <% elsif level2.fields.key?(:reference) %>
-                             href=<%= level2.reference.slug %>>
-                             <% else %>
-                             >
-                             <% end %>
-                             <%= level2.title %></a></li>
-                      <% end %>
-                    </ul>
-                    <% end %>
-                  </li>
-                  <% end %>
-                </ul>
-                <% end %>
-              </li>
-              <% end %>
-            </ul>
-            <% end %>
-          </nav>
+          <!-- menu content -->
+          <%= render 'layouts/main_menu'%>
         </div>
       </div>
     </div>
@@ -190,9 +142,11 @@
     <section>
       <div class="container mt-30 mb-30 pt-30 pb-30">
         <div class="row ">
+          <!-- posts and pages content -->
           <div class="col-md-9 blog-pull-right">
             <%= yield %>
           </div>
+          <!-- left sidebar -->
           <div class="col-sm-12 col-md-3">
             <div class="sidebar sidebar-left mt-sm-30">
               <%= render 'layouts/widget_search_box' %>
