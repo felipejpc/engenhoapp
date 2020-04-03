@@ -150,7 +150,7 @@
           <div class="col-sm-12 col-md-3">
             <div class="sidebar sidebar-left mt-sm-30">
               <%= render 'layouts/widget_search_box' %>
-              <% unless current_page?(controller: 'posts') %>
+              <% if params[:controller] == "posts" && params[:action] == "show" %>
                 <%= render 'layouts/widget_related_posts' %>
               <% end %>
               <%= render 'layouts/widget_highlighted_posts' %>

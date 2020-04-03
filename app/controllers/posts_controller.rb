@@ -70,10 +70,10 @@ class PostsController < ApplicationController
 
     # TODO Order by popularity (higher view counts)
     def related_posts
-      reference_post_tags = Post.find_by(slug: params[:slug]).tags
-      contentful_tags_id_array = []
-      reference_post_tags.each { |tag| contentful_tags_id_array << tag.contentful_id }
-      @related_posts = Post.joins(:tags).distinct.where(posts_tags: { tag_id: contentful_tags_id_array }).limit(5)
+      referenced_post_tags = Post.find_by(slug: params[:slug]).tags
+      tags_id_array = []
+      referenced_post_tags.each { |tag| tags_id_array << tag.id }
+      @related_posts = Post.joins(:tags).distinct.where(posts_tags: { tag_id: tags_id_array }).limit(3)
     end
 
     def categorized_posts
