@@ -10,10 +10,11 @@ class ContentfulSyncLocalDb
   # TODO create a treatment for responses with over 1000 records next_page method. See: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization/pagination-and-subsequent-syncs
   # TODO change sync approach for delta updates
   def self.run
+    PostsTags.delete_all
     Post.delete_all
     Tag.delete_all
-    PostsTags.delete_all
     Category.delete_all
+    Page.delete_all
 
     tags = @@client.entries(content_type: 'postTag', include: 2)
     tags.each do |tag|
@@ -33,6 +34,11 @@ class ContentfulSyncLocalDb
         post_tag = Tag.find_by(contentful_id: tag.id)
         PostsTags.create(post_id: post_in_db.id, tag_id: post_tag.id)
       end
+    end
+
+    pages = @@client.entries(content_type: 'blogPage', include: 2)
+    pages.each do |page|
+      Page.create(title: page.title, slug: page.slug, body: page.body, contentful_id: page.id)
     end
   end
 end
