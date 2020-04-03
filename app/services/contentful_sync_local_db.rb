@@ -13,18 +13,26 @@ class ContentfulSyncLocalDb
     Post.delete_all
     Tag.delete_all
     PostsTags.delete_all
-
-    posts = @@client.entries(content_type: 'blogPost', include: 2)
-    posts.each do |post|
-      Post.new(contentful_id: post.id, title: post.title, slug: post.slug, description: post.description, thumb_image: post.thumb_image.url).save
-      post.tags.each do |tag|
-        PostsTags.create(post_id: post.id, tag_id: tag.id)
-      end
-    end
+    Category.delete_all
 
     tags = @@client.entries(content_type: 'postTag', include: 2)
     tags.each do |tag|
       Tag.new(contentful_id: tag.id, tag_name: tag.tag).save
+    end
+
+    categories = @@client.entries(content_type: 'postCategory', include: 2)
+    categories.each do |category|
+      Category.new(contentful_id: category.id, name: category.name).save
+    end
+
+    posts = @@client.entries(content_type: 'blogPost', include: 2)
+    posts.each do |post|
+      post_category = Category.find_by(contentful_id: post.category.id)
+      post_in_db = post_category.posts.create(contentful_id: post.id, title: post.title, slug: post.slug, description: post.description, thumb_image: post.thumb_image.url)
+      post.tags.each do |tag|
+        post_tag = Tag.find_by(contentful_id: tag.id)
+        PostsTags.create(post_id: post_in_db.id, tag_id: post_tag.id)
+      end
     end
   end
 end

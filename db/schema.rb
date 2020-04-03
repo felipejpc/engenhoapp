@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_095014) do
+ActiveRecord::Schema.define(version: 2020_04_02_134508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "contentful_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contentful_id"], name: "index_categories_on_contentful_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -23,13 +31,17 @@ ActiveRecord::Schema.define(version: 2020_04_01_095014) do
     t.text "description"
     t.string "contentful_id"
     t.string "thumb_image"
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|
-    t.string "tag_id"
-    t.string "post_id"
+    t.bigint "post_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["post_id"], name: "index_posts_tags_on_post_id"
+    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
   create_table "syncs", force: :cascade do |t|
@@ -48,4 +60,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_095014) do
     t.index ["contentful_id"], name: "index_tags_on_contentful_id"
   end
 
+  add_foreign_key "posts", "categories"
+  add_foreign_key "posts_tags", "posts"
+  add_foreign_key "posts_tags", "tags"
 end

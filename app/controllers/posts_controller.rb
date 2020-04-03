@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
   before_action :all_tags
   before_action :highlighted_posts
+  before_action :categorized_posts
 
   # GET /posts
   # GET /posts.json
@@ -15,7 +16,8 @@ class PostsController < ApplicationController
     # only search on references on fields which link to a single entry.
     # Fields which hold references to many entries or fields with references to assets are not supported.
     # See https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/localization
-    if params[:tag].present?
+    # TODO Refator method retriving local data instead of contentful data
+    if params.has_key? :tag
       posts = contentful.entries(content_type: 'blogPost', include: 2)
       posts_with_tag = []
       posts.each do |post|
@@ -25,8 +27,17 @@ class PostsController < ApplicationController
             break
           end
         end
+        @contentful_posts =  posts_with_tag
       end
-      @contentful_posts = posts_with_tag
+    elsif params.has_key? :category
+      posts = contentful.entries(content_type: 'blogPost', include: 2)
+      posts_with_category = []
+      posts.each do |post|
+        if post.category.name == params[:category]
+          posts_with_category << post
+        end
+        @contentful_posts = posts_with_category
+      end
     else
       @contentful_posts = contentful.entries(content_type: 'blogPost', include: 2)
     end
@@ -63,5 +74,14 @@ class PostsController < ApplicationController
       contentful_tags_id_array = []
       reference_post_tags.each { |tag| contentful_tags_id_array << tag.contentful_id }
       @related_posts = Post.joins(:tags).distinct.where(posts_tags: { tag_id: contentful_tags_id_array }).limit(5)
+    end
+
+    def categorized_posts
+      results = ActiveRecord::Base.connection.exec_query('SELECT c.name, count(p.id)
+                                                        FROM categories c, posts p
+                                                        WHERE c.id = p.category_id
+                                                        GROUP BY c.name')
+      @categorized_posts = []
+      results.each { |result| @categorized_posts << result }
     end
 end
