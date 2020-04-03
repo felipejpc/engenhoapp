@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_102910) do
+ActiveRecord::Schema.define(version: 2020_04_03_144151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_102910) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["contentful_id"], name: "index_categories_on_contentful_id"
+    t.index ["contentful_id"], name: "index_categories_on_contentful_id", unique: true
   end
 
   create_table "pages", force: :cascade do |t|
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_102910) do
     t.string "tag_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["contentful_id"], name: "index_tags_on_contentful_id"
+    t.index ["contentful_id"], name: "index_tags_on_contentful_id", unique: true
   end
 
   add_foreign_key "posts", "categories"
