@@ -46,13 +46,14 @@ class Blog::PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post_in_local_db.increment_views
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      post_in_local_db = Blog::Post.find_by!(slug: params[:slug])
-      @contentful_post = contentful.entries('sys.id' => post_in_local_db.contentful_id).first
+      @post_in_local_db = Blog::Post.find_by!(slug: params[:slug])
+      @contentful_post = contentful.entries('sys.id' => @post_in_local_db.contentful_id).first
     end
 
     def contentful_layout(layout)

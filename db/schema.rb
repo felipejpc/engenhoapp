@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_093753) do
+ActiveRecord::Schema.define(version: 2020_04_04_101540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_093753) do
     t.index ["contentful_id"], name: "index_categories_on_contentful_id", unique: true
   end
 
-  create_table "blog_pages", force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.string "contentful_id"
     t.string "title"
     t.string "slug"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_093753) do
     t.string "contentful_id"
     t.string "thumb_image"
     t.bigint "category_id", null: false
+    t.integer "views"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
