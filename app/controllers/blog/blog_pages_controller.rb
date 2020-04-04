@@ -1,4 +1,4 @@
-class Blog::PagesController < ApplicationController
+class Blog::BlogPagesController < ApplicationController
   layout 'blog'
   before_action do
     contentful_layout('Blog Standard Layout')
@@ -8,15 +8,15 @@ class Blog::PagesController < ApplicationController
   before_action :highlighted_posts
   before_action :categorized_posts
 
-  # GET /pages/1
-  # GET /pages/1.json
+  # GET /blog_pages/1
+  # GET /blog_pages/1.json
   def show
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Blog::Page.find_by(slug: params[:slug])
+      @page = Blog::BlogPage.find_by(slug: params[:slug])
     end
     # TODO DRY method - repeated on PostsController
     def contentful_layout(layout)

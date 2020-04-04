@@ -14,7 +14,7 @@ class ContentfulSyncLocalDb
     Blog::Post.delete_all
     Blog::Tag.delete_all
     Blog::Category.delete_all
-    Blog::Page.delete_all
+    Page.delete_all
 
     tags = @@client.entries(content_type: 'postTag', include: 2)
     tags.each do |tag|
@@ -38,7 +38,7 @@ class ContentfulSyncLocalDb
 
     pages = @@client.entries(content_type: 'blogPage', include: 2)
     pages.each do |page|
-      Blog::Page.create(title: page.title, slug: page.slug, body: page.body, contentful_id: page.id)
+      Blog::BlogPage.create(title: page.title, slug: page.slug, body: page.body, contentful_id: page.id)
     end
   end
 end

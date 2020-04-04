@@ -1,6 +1,6 @@
 class CreatePages < ActiveRecord::Migration[6.0]
   def change
-    create_table :pages do |t|
+    create_table :blog_pages do |t|
       t.string :contentful_id
       t.string :title
       t.string :slug
@@ -8,7 +8,7 @@ class CreatePages < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :pages, :slug, unique: true
-    add_index :pages, :contentful_id, unique: true
+    add_index :blog_pages, :slug, unique: true
+    add_index :blog_pages, :contentful_id, unique: true
   end
 end
