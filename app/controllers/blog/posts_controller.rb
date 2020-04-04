@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Blog::PostsController < ApplicationController
   layout 'blog'
   before_action :set_post, only: [:show]
   before_action :related_posts, only: [:show]
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      post_in_local_db = Post.find_by!(slug: params[:slug])
+      post_in_local_db = Blog::Post.find_by!(slug: params[:slug])
       @contentful_post = contentful.entries('sys.id' => post_in_local_db.contentful_id).first
     end
 
@@ -70,10 +70,10 @@ class PostsController < ApplicationController
 
     # TODO Order by popularity (higher view counts)
     def related_posts
-      referenced_post_tags = Post.find_by(slug: params[:slug]).tags
+      referenced_post_tags = Blog::Post.find_by(slug: params[:slug]).tags
       tags_id_array = []
       referenced_post_tags.each { |tag| tags_id_array << tag.id }
-      @related_posts = Post.joins(:tags).distinct.where(posts_tags: { tag_id: tags_id_array }).limit(3)
+      @related_posts = Blog::Post.joins(:tags).distinct.where(posts_tags: { tag_id: tags_id_array }).limit(3)
     end
 
     def categorized_posts
