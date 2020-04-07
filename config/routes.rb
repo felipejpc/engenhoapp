@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     constraints subdomain: 'blog' do
       resources :blog_pages, param: :slug, only: [:show]
       resources :posts, param: :slug, only: [:index, :show]
+      get 'posts-search', to: 'posts#search'
     end
   end
 
