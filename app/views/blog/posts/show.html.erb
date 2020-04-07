@@ -61,84 +61,26 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="comments-area">
-    <h5 class="comments-title">Comments</h5>
-    <ul class="comment-list">
-      <li>
-        <div class="media comment-author"> <a class="media-left" href="#"><img class="img-thumbnail" src="http://placehold.it/75x75" alt=""></a>
-          <div class="media-body">
-            <h5 class="media-heading comment-heading">John Doe says:</h5>
-            <div class="comment-date">23/06/2014</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea commodo consequat...</p>
-            <a class="replay-icon pull-right text-theme-colored" href="#"> <i class="fa fa-commenting-o text-theme-colored"></i> Replay</a> </div>
-        </div>
-      </li>
-      <li>
-        <div class="media comment-author"> <a class="media-left" href="#"><img class="img-thumbnail" src="http://placehold.it/75x75" alt=""></a>
-          <div class="media-body">
-            <h5 class="media-heading comment-heading">John Doe says:</h5>
-            <div class="comment-date">23/06/2014</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea commodo consequat...</p>
-            <a class="replay-icon pull-right text-theme-colored" href="#"> <i class="fa fa-commenting-o text-theme-colored"></i> Replay</a>
-            <div class="clearfix"></div>
-            <div class="media comment-author nested-comment"> <a href="#" class="media-left pt-20"><img alt="" src="http://placehold.it/75x75" class="img-thumbnail"></a>
-              <div class="media-body p-20 bg-lighter">
-                <h5 class="media-heading comment-heading">John Doe says:</h5>
-                <div class="comment-date">23/06/2014</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea commodo consequat...</p>
-                <a class="replay-icon pull-right text-theme-colored" href="#"> <i class="fa fa-commenting-o text-theme-colored"></i> Replay</a>
-              </div>
-            </div>
-            <div class="media comment-author nested-comment"> <a href="#" class="media-left pt-20"><img alt="" src="http://placehold.it/75x75" class="img-thumbnail"></a>
-              <div class="media-body p-20 bg-lighter">
-                <h5 class="media-heading comment-heading">John Doe says:</h5>
-                <div class="comment-date">23/06/2014</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea commodo consequat...</p>
-                <a class="replay-icon pull-right text-theme-colored" href="#"> <i class="fa fa-commenting-o text-theme-colored"></i> Replay</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="media comment-author"> <a class="media-left" href="#"><img class="img-thumbnail" src="http://placehold.it/75x75" alt=""></a>
-          <div class="media-body">
-            <h5 class="media-heading comment-heading">John Doe says:</h5>
-            <div class="comment-date">23/06/2014</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea commodo consequat...</p>
-            <a class="replay-icon pull-right text-theme-colored" href="#"> <i class="fa fa-commenting-o text-theme-colored"></i> Replay</a> </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="comment-box">
-    <div class="row">
-      <div class="col-sm-12">
-        <h5>Leave a Comment</h5>
-        <div class="row">
-          <form role="form" id="comment-form">
-            <div class="col-sm-6 pt-0 pb-0">
-              <div class="form-group">
-                <input type="text" class="form-control" required name="contact_name" id="contact_name" placeholder="Enter Name">
-              </div>
-              <div class="form-group">
-                <input type="text" required class="form-control" name="contact_email2" id="contact_email2" placeholder="Enter Email">
-              </div>
-              <div class="form-group">
-                <input type="text" placeholder="Enter Website" required class="form-control" name="subject">
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <textarea class="form-control" required name="contact_message2" id="contact_message2"  placeholder="Enter Message" rows="7"></textarea>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-flat pull-right m-0" data-loading-text="Please wait...">Submit</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <div id="disqus_thread"></div>
+  <!-- Disqus comments area -->
+  <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+    var disqus_config = function () {
+      this.page.url = <%= request.original_url %>;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = <%= @contentful_post.slug %>; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://engenho.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 </div>
