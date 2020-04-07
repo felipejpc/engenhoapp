@@ -4,8 +4,9 @@
 // that code so it'll be compiled.
 //= require turbolinks
 //= require jquery-2.2.0.min
-//= require_tree .
-
+//= require bootstrap.min
+//= require jquery-plugin-collection
+//= require jquery-ui.min
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
