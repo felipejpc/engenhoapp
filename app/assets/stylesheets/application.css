@@ -21,6 +21,7 @@
  *= require responsive.css
  *= require style.css
  *= require theme-skin-blue.css
+ *= require social-share-button
  *= require_tree .
  *= require_self
  */

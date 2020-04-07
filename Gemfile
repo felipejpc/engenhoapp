@@ -32,6 +32,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Platform to control content from a single hub and CMS.
 gem 'contentful'
+# Quickly create a share feature in you Rails apps. https://github.com/huacnlee/social-share-button
+gem 'social-share-button'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
