@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AlterPostColumn < ActiveRecord::Migration[6.0]
   def change
     remove_index :posts, :content_id

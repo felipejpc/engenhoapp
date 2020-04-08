@@ -7,15 +7,6 @@ Rails:
 Metrics/LineLength:
   Max: 120
 
-# Too short methods lead to extraction of single-use methods, which can make
-# the code easier to read (by naming things), but can also clutter the class
-Metrics/MethodLength:
-  Max: 15
-
-# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
-Metrics/ClassLength:
-  Max: 150
-
 # No space makes the method definition shorter and differentiates
 # from a regular assignment.
 Style/SpaceAroundEqualsInParameterDefault:
@@ -46,23 +37,6 @@ Style/CollectionMethods:
     # inject seems more common in the community.
     reduce: "inject"
 
-# Either allow this style or don't. Marking it as safe with parenthesis
-# is silly. Let's try to live without them for now.
-Style/ParenthesesAroundCondition:
-  AllowSafeAssignment: false
-Lint/AssignmentInCondition:
-  AllowSafeAssignment: false
-
-# A specialized exception class will take one or more arguments and construct the message from it.
-# So both variants make sense.
-Style/RaiseArgs:
-  Enabled: false
-
-# Indenting the chained dots beneath each other is not supported by this cop,
-# see https://github.com/bbatsov/rubocop/issues/1633
-Style/MultilineOperationIndentation:
-  Enabled: false
-
 # Fail is an alias of raise. Avoid aliases, it's more cognitive load for no gain.
 # The argument that fail should be used to abort the program is wrong too,
 # there's Kernel#abort for that.
@@ -85,13 +59,6 @@ Style/SpaceInsideHashLiteralBraces:
 Style/BlockDelimiters:
   Enabled: false
 
-# do / end blocks should be used for side effects,
-# methods that run a block for side effects and have
-# a useful return value are rare, assign the return
-# value to a local variable for those cases.
-Style/MethodCalledOnDoEndBlock:
-  Enabled: true
-
 # Enforcing the names of variables? To single letter ones? Just no.
 Style/SingleLineBlockParams:
   Enabled: false
@@ -106,13 +73,4 @@ Lint/ShadowingOuterLocalVariable:
 
 # This is just silly. Calling the argument `other` in all cases makes no sense.
 Naming/BinaryOperatorParameterName:
-  Enabled: false
-
-# There are valid cases, for example debugging Cucumber steps,
-# also they'll fail CI anyway
-Lint/Debugger:
-  Enabled: false
-
-# Style preference
-Style/MethodDefParentheses:
   Enabled: false

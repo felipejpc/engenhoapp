@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddContentIdIndexToPosts < ActiveRecord::Migration[6.0]
   def change
     remove_index :posts, :content_id
