@@ -9,18 +9,22 @@ class ContentfulTagsSynchronization
     environment: "master",
     dynamic_entries: :auto
   )
-  # TODO: create a treatment for responses with over 1000 records next_page method. See: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization/pagination-and-subsequent-syncs
+  # TODO: create a treatment for responses with over 1000 records next_page method.
+  # See: https://www.contentful.com/developers/docs/references/content-delivery-api/
+  # #/reference/synchronization/pagination-and-subsequent-syncs
   # TODO refactor methods to dry code
   def self.initial_sync_tags
     sync = @@client.sync(initial: true, content_type: "postTag", type: "Entry")
     sync.each_item do |item|
       Tag.new(contentful_id: item.id, tag_name: item.tag).save
     end
-    Sync.new(content_type: "postTag", sync_type: "initial entries", sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
+    Sync.new(content_type: "postTag", sync_type: "initial entries",
+             sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
 
     sync = @@client.sync(initial: true, type: "Deletion")
     sync.each_item {|a| p a }
-    Sync.new(content_type: "postTag", sync_type: "initial deletion", sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
+    Sync.new(content_type: "postTag", sync_type: "initial deletion",
+             sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
   end
 
   def self.delta_sync_tags
@@ -33,7 +37,8 @@ class ContentfulTagsSynchronization
         tag&.update(contentful_id: item.id, tag_name: item.tag)
       end
     end
-    Sync.new(content_type: "postTag", sync_type: "delta entries", sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
+    Sync.new(content_type: "postTag", sync_type: "delta entries",
+             sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
 
     sync = @@client.sync(sync_token: deletion_sync_token)
     unless sync.nil?
@@ -41,11 +46,10 @@ class ContentfulTagsSynchronization
         tag = Tag.find_by(contentful_id: item.id)
         tag&.destroy
       end
-      Sync.new(content_type: "postTag", sync_type: "delta deletion", sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
+      Sync.new(content_type: "postTag", sync_type: "delta deletion",
+               sync_token: sync.next_sync_url.nil? ? nil : sync.next_sync_url.split("sync_token=")[1]).save
     end
   end
-
-  private
 
   def self.new_entry?(contentful_id)
     Tag.find_by(contentful_id: contentful_id).nil?
