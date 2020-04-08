@@ -6,12 +6,12 @@ Rails:
   Enable: true
 
 # Commonly used screens these days easily fit more than 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 # No space makes the method definition shorter and differentiates
 # from a regular assignment.
-Style/SpaceAroundEqualsInParameterDefault:
+Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 # Single quotes being faster is hardly measurable and only affects parse time.
@@ -45,7 +45,7 @@ Style/CollectionMethods:
 Style/SignalException:
   EnforcedStyle: only_raise
 
-Style/SpaceInsideBlockBraces:
+Layout/SpaceInsideBlockBraces:
   # The space here provides no real gain in readability while consuming
   # horizontal space that could be used for a better parameter name.
   # Also {| differentiates better from a hash than { | does.
@@ -53,7 +53,7 @@ Style/SpaceInsideBlockBraces:
 
 # No trailing space differentiates better from the block:
 # foo} means hash, foo } means block.
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 # { ... } for multi-line blocks is okay, follow Weirichs rule instead:
@@ -76,3 +76,18 @@ Lint/ShadowingOuterLocalVariable:
 # This is just silly. Calling the argument `other` in all cases makes no sense.
 Naming/BinaryOperatorParameterName:
   Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
