@@ -42,6 +42,11 @@ group :development, :test do
   gem 'pry', '~> 0.12.2'
   # Adds step-by-step debugging and stack navigation capabilities to pry using byebug.
   gem 'pry-byebug'
+  # Static code analyzer and code formatter. Out of the box it will enforce many of the guidelines outlined in the
+  # community Ruby Style Guide.
+  gem 'rubocop', require: false
+  # A RuboCop extension focused on enforcing Ruby and Rails best practices and coding conventions.
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
