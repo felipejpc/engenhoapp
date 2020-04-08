@@ -62,211 +62,188 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
+  <!-- JS | script for google custom searches -->
   <script async src="https://cse.google.com/cse.js?cx=010039346642802683348:p94e0yp2jk9"></script>
 </head>
-
 <body>
-
-<div id="wrapper">
-  <!-- preloader -->
-  <div id="preloader">
-    <div id="spinner">
-      <%= image_tag '8.gif' %>
-    </div>
-    <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
-  </div>
-
-  <!-- Header -->
-  <header id="header" class="header">
-    <div class="header-top bg-theme-colored sm-text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="widget no-border m-0">
-              <ul class="social-icons icon-dark icon-theme-colored icon-sm sm-text-center">
-                <li><a href=<%= @contentful_layout[0].social_media.facebook %>><i class="fa fa-facebook"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.twitter %>><i class="fa fa-twitter"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.youtube %>><i class="fa fa-youtube"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.instagram %>><i class="fa fa-instagram"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="widget no-border m-0">
-              <ul class="list-inline pull-right flip sm-pull-none sm-text-center mt-5">
-                <li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-white"></i> <a class="text-white" href="#"><%= @contentful_layout[0].contacts.phone1 %></a> </li>
-                <li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-white"></i> <a class="text-white" href="#"><%= @contentful_layout[0].contacts.email1 %></a> </li>
-                <li class="sm-display-block mt-sm-10 mb-sm-10">
-                  <!-- Modal: Appointment Starts -->
-                  <a class="bg-light p-5 text-theme-colored font-11 pl-10 pr-10"data-toggle="modal" data-target="#BSParentModal" href="ajax-load/form-appointment.html">Make an Appointment</a>
-                  <!-- Modal: Appointment End -->
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="header-nav">
-      <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest">
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header" class="header">
+      <div class="header-top bg-theme-colored sm-text-center">
         <div class="container">
-          <!-- menu content -->
-          <%= render 'layouts/main_menu'%>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Start main-content -->
-  <div class="main-content">
-    <!-- Section: inner-header -->
-    <section class="inner-header divider layer-overlay overlay-deep" data-bg-img="http://placehold.it/1920x1280">
-      <div class="container pt-90 pb-50">
-        <!-- Section Content -->
-        <div class="section-content">
           <div class="row">
-            <div class="col-md-12 xs-text-center">
-              <!-- #TODO change according route (index or show) -->
-              <h3 class="font-28">Mudar de Acordo com localização</h2>
-                <ol class="breadcrumb white mt-10">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Pages</a></li>
-                  <li class="active text-theme-colored">Blog</li>
-                </ol>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container mt-30 mb-30 pt-30 pb-30">
-        <div class="row ">
-          <!-- posts and blog_pages content -->
-          <div class="col-md-9 blog-pull-right">
-            <%= yield %>
-          </div>
-          <!-- left sidebar -->
-          <div class="col-sm-12 col-md-3">
-            <div class="sidebar sidebar-left mt-sm-30">
-              <%= render 'layouts/widget_search_box' %>
-              <% if params[:controller] == "posts" && params[:action] == "show" %>
-                <%= render 'layouts/widget_related_posts' %>
-              <% end %>
-              <%= render 'layouts/widget_highlighted_posts' %>
-              <%= render 'layouts/widget_posts_categories' %>
-              <%= render 'layouts/widget_tags' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- end main-content -->
-
-  <!-- Footer -->
-  <footer id="footer" class="footer pb-0 bg-black-111">
-    <div class="container pb-20">
-      <div class="row multi-row-clearfix">
-        <div class="col-sm-6 col-md-3">
-          <!-- TODO To include logo into contentful model -->
-          <div class="widget dark"> <%= image_tag 'logo-wide-white.png' %>
-            <p class="font-12 mt-20 mb-10"><%= @contentful_layout[0].content.summary %></p>
-            <!-- TODO Link Read More to a Page -->
-            <a class="text-gray font-12" href="#"><i class="fa fa-angle-double-right text-theme-colored"></i> Read more</a>
-            <ul class="social-icons icon-dark mt-20">
-              <li><a href=<%= @contentful_layout[0].social_media.facebook %> data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
-              <li><a href=<%= @contentful_layout[0].social_media.twitter %> data-bg-color="#02B0E8"><i class="fa fa-twitter"></i></a></li>
-              <li><a href=<%= @contentful_layout[0].contacts.skype %> data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
-              <li><a href=<%= @contentful_layout[0].social_media.instagram %> data-bg-color="#A11312"><i class="fa fa-instagram"></i></a></li>
-              <li><a href=<%= @contentful_layout[0].social_media.youtube %> data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="widget dark">
-            <h5 class="widget-title line-bottom">Pages</h5>
-            <ul class="list-border list theme-colored angle-double-right">
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Donor Privacy Policy</a></li>
-              <li><a href="#">Disclaimer</a></li>
-              <li><a href="#">Terms of Use</a></li>
-              <li><a href="#">Copyright Notice</a></li>
-              <li><a href="#">Media Center</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="widget dark">
-            <h5 class="widget-title line-bottom">Quick Links</h5>
-            <ul class="list-border list theme-colored angle-double-right">
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Donor Privacy Policy</a></li>
-              <li><a href="#">Disclaimer</a></li>
-              <li><a href="#">Terms of Use</a></li>
-              <li><a href="#">Copyright Notice</a></li>
-              <li><a href="#">Media Center</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="widget dark">
-            <h5 class="widget-title line-bottom">Quick Contact</h5>
-            <ul class="list list-border">
-              <li><a href="#"><%= @contentful_layout[0].contacts.phone1 %></a></li>
-              <li><a href="#"><%= @contentful_layout[0].contacts.email1 %></a></li>
-              <li><a href="#" class="lineheight-20"><%= @contentful_layout[0].contacts.address %></a></li>
-            </ul>
-            <p class="text-white mb-5 mt-15">Subscribe to our newsletter</p>
-            <form id="footer-mailchimp-subscription-form" class="newsletter-form mt-10">
-              <label class="display-block" for="mce-EMAIL"></label>
-              <div class="input-group">
-                <input type="email" value="" name="EMAIL" placeholder="Your Email"  class="form-control" data-height="37px" id="mce-EMAIL">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-colored btn-theme-colored m-0"><i class="fa fa-paper-plane-o text-white"></i></button>
-                </span>
+            <div class="col-md-3">
+              <div class="widget no-border m-0">
+                <ul class="social-icons icon-dark icon-theme-colored icon-sm sm-text-center">
+                  <li><a href=<%= @contentful_layout[0].social_media.facebook %>><i class="fa fa-facebook"></i></a></li>
+                  <li><a href=<%= @contentful_layout[0].social_media.twitter %>><i class="fa fa-twitter"></i></a></li>
+                  <li><a href=<%= @contentful_layout[0].social_media.youtube %>><i class="fa fa-youtube"></i></a></li>
+                  <li><a href=<%= @contentful_layout[0].social_media.instagram %>><i class="fa fa-instagram"></i></a></li>
+                </ul>
               </div>
-            </form>
-            <!-- Mailchimp Subscription Form Validation-->
-            <script type="text/javascript">
-              $('#footer-mailchimp-subscription-form').ajaxChimp({
-                callback: mailChimpCallBack,
-                url: '//thememascot.us9.list-manage.com/subscribe/post?u=a01f440178e35febc8cf4e51f&amp;id=49d6d30e1e'
-              });
-
-              function mailChimpCallBack(resp) {
-                // Hide any previous response text
-                var $mailchimpform = $('#footer-mailchimp-subscription-form'),
-                    $response = '';
-                $mailchimpform.children(".alert").remove();
-                console.log(resp);
-                if (resp.result === 'success') {
-                  $response = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
-                } else if (resp.result === 'error') {
-                  $response = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
-                }
-                $mailchimpform.prepend($response);
-              }
-            </script>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer-nav bg-black-222 p-20">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <p class="text-white font-11 m-0"><%= @contentful_layout[0].content.copyright %></p>
+      <div class="header-nav">
+        <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest">
+          <div class="container">
+            <!-- menu content -->
+            <%= render 'layouts/main_menu'%>
+          </div>
         </div>
       </div>
+    </header>
+
+    <!-- Start main-content -->
+    <div class="main-content">
+      <!-- Section: inner-header -->
+      <section class="inner-header divider layer-overlay overlay-deep" data-bg-img="http://placehold.it/1920x1280">
+        <div class="container pt-90 pb-50">
+          <!-- Section Content -->
+          <div class="section-content">
+            <div class="row">
+              <div class="col-md-12 xs-text-center">
+                <!-- #TODO change according route (index or show) -->
+                <h3 class="font-28">Mudar de Acordo com localização</h2>
+                  <ol class="breadcrumb white mt-10">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li class="active text-theme-colored">Blog</li>
+                  </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container mt-30 mb-30 pt-30 pb-30">
+          <div class="row ">
+            <!-- posts and blog_pages content -->
+            <div class="col-md-9 blog-pull-right">
+              <%= yield %>
+            </div>
+            <!-- left sidebar -->
+            <div class="col-sm-12 col-md-3">
+              <div class="sidebar sidebar-left mt-sm-30">
+                <%= render 'layouts/widget_search_box' %>
+                <% if params[:controller] == "blog/posts" && params[:action] == "show" %>
+                  <%= render 'layouts/widget_related_posts' %>
+                <% end %>
+                <%= render 'layouts/widget_highlighted_posts' %>
+                <%= render 'layouts/widget_posts_categories' %>
+                <%= render 'layouts/widget_tags' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </footer>
-  <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
-</div>
-<!-- end wrapper -->
+    <!-- end main-content -->
 
-<!-- Footer Scripts -->
-<!-- JS | Custom script for all blog_pages -->
+    <!-- Footer -->
+    <footer id="footer" class="footer pb-0 bg-black-111">
+      <div class="container pb-20">
+        <div class="row multi-row-clearfix">
+          <div class="col-sm-6 col-md-3">
+            <!-- TODO To include logo into contentful model -->
+            <div class="widget dark"> <%= image_tag 'logo-wide-white.png' %>
+              <p class="font-12 mt-20 mb-10"><%= @contentful_layout[0].content.summary %></p>
+              <!-- TODO Link Read More to a Page -->
+              <a class="text-gray font-12" href="#"><i class="fa fa-angle-double-right text-theme-colored"></i> Read more</a>
+              <ul class="social-icons icon-dark mt-20">
+                <li><a href=<%= @contentful_layout[0].social_media.facebook %> data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
+                <li><a href=<%= @contentful_layout[0].social_media.twitter %> data-bg-color="#02B0E8"><i class="fa fa-twitter"></i></a></li>
+                <li><a href=<%= @contentful_layout[0].contacts.skype %> data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
+                <li><a href=<%= @contentful_layout[0].social_media.instagram %> data-bg-color="#A11312"><i class="fa fa-instagram"></i></a></li>
+                <li><a href=<%= @contentful_layout[0].social_media.youtube %> data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="widget dark">
+              <h5 class="widget-title line-bottom">Pages</h5>
+              <ul class="list-border list theme-colored angle-double-right">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Donor Privacy Policy</a></li>
+                <li><a href="#">Disclaimer</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Copyright Notice</a></li>
+                <li><a href="#">Media Center</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="widget dark">
+              <h5 class="widget-title line-bottom">Quick Links</h5>
+              <ul class="list-border list theme-colored angle-double-right">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Donor Privacy Policy</a></li>
+                <li><a href="#">Disclaimer</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Copyright Notice</a></li>
+                <li><a href="#">Media Center</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="widget dark">
+              <h5 class="widget-title line-bottom">Quick Contact</h5>
+              <ul class="list list-border">
+                <li><a href="#"><%= @contentful_layout[0].contacts.phone1 %></a></li>
+                <li><a href="#"><%= @contentful_layout[0].contacts.email1 %></a></li>
+                <li><a href="#" class="lineheight-20"><%= @contentful_layout[0].contacts.address %></a></li>
+              </ul>
+              <p class="text-white mb-5 mt-15">Subscribe to our newsletter</p>
+              <form id="footer-mailchimp-subscription-form" class="newsletter-form mt-10">
+                <label class="display-block" for="mce-EMAIL"></label>
+                <div class="input-group">
+                  <input type="email" value="" name="EMAIL" placeholder="Your Email"  class="form-control" data-height="37px" id="mce-EMAIL">
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-colored btn-theme-colored m-0"><i class="fa fa-paper-plane-o text-white"></i></button>
+                  </span>
+                </div>
+              </form>
+              <!-- Mailchimp Subscription Form Validation-->
+              <script type="text/javascript">
+                $('#footer-mailchimp-subscription-form').ajaxChimp({
+                  callback: mailChimpCallBack,
+                  url: '//thememascot.us9.list-manage.com/subscribe/post?u=a01f440178e35febc8cf4e51f&amp;id=49d6d30e1e'
+                });
 
-<%= javascript_include_tag 'custom', 'data-turbolinks-track': 'reload' %>
+                function mailChimpCallBack(resp) {
+                  // Hide any previous response text
+                  var $mailchimpform = $('#footer-mailchimp-subscription-form'),
+                      $response = '';
+                  $mailchimpform.children(".alert").remove();
+                  console.log(resp);
+                  if (resp.result === 'success') {
+                    $response = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+                  } else if (resp.result === 'error') {
+                    $response = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+                  }
+                  $mailchimpform.prepend($response);
+                }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav bg-black-222 p-20">
+        <div class="row text-center">
+          <div class="col-md-12">
+            <p class="text-white font-11 m-0"><%= @contentful_layout[0].content.copyright %></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+  </div>
+  <!-- end wrapper -->
+
+  <!-- Footer Scripts -->
+  <!-- JS | Custom script for all blog_pages -->
+
+  <%= javascript_include_tag 'custom', 'data-turbolinks-track': 'reload' %>
 </body>
