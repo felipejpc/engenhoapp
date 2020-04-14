@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_101540) do
+ActiveRecord::Schema.define(version: 2020_04_14_100142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,29 +23,36 @@ ActiveRecord::Schema.define(version: 2020_04_04_101540) do
     t.index ["contentful_id"], name: "index_categories_on_contentful_id", unique: true
   end
 
+  create_table "layouts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "contentful_id", null: false
+    t.jsonb "json", default: "{}", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contentful_id"], name: "index_layouts_on_contentful_id"
+    t.index ["name"], name: "index_layouts_on_name"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "contentful_id"
-    t.string "title"
     t.string "slug"
-    t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
+    t.jsonb "json", default: "{}", null: false
     t.index ["contentful_id"], name: "index_pages_on_contentful_id", unique: true
     t.index ["slug"], name: "index_pages_on_slug", unique: true
     t.index ["type"], name: "index_pages_on_type"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
-    t.text "description"
     t.string "contentful_id"
-    t.string "thumb_image"
     t.bigint "category_id", null: false
     t.integer "views"
+    t.jsonb "json", default: "{}", null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
     t.index ["slug"], name: "index_posts_on_slug", unique: true
