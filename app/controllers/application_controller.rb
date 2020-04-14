@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
       space: "h0hn2pnr1nct"
     )
   end
+
+  def layout_data(layout)
+    @layout_data = Layout.find_by(name: layout)
+    binding.pry
+  end
 end

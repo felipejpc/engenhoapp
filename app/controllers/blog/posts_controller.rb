@@ -4,8 +4,9 @@ class Blog::PostsController < ApplicationController
   layout "blog"
   before_action :set_post, only: [:show]
   before_action :related_posts, only: [:show]
+  #TODO DRY contentful_layout method. Research about rails layout method
   before_action do
-    contentful_layout("Blog Standard Layout")
+    layout_data("Blog Standard Layout")
   end
   before_action :all_tags
   before_action :highlighted_posts
@@ -57,10 +58,6 @@ class Blog::PostsController < ApplicationController
   def set_post
     @post_in_local_db = Blog::Post.find_by!(slug: params[:slug])
     @contentful_post = contentful.entries("sys.id" => @post_in_local_db.contentful_id).first
-  end
-
-  def contentful_layout(layout)
-    @contentful_layout = contentful.entries("content_type" => "blogLayout", "include" => 4, "fields.name" => layout)
   end
 
   def all_tags

@@ -21,11 +21,6 @@ class Blog::BlogPagesController < ApplicationController
     @page = Blog::BlogPage.find_by(slug: params[:slug])
   end
 
-  # TODO: DRY method - repeated on PostsController
-  def contentful_layout(layout)
-    @contentful_layout = contentful.entries("content_type" => "blogLayout", "include" => 4, "fields.name" => layout)
-  end
-
   def all_tags
     @all_post_tags = contentful.entries(content_type: "postTag", include: 2)
   end

@@ -75,10 +75,10 @@
             <div class="col-md-3">
               <div class="widget no-border m-0">
                 <ul class="social-icons icon-dark icon-theme-colored icon-sm sm-text-center">
-                  <li><a href=<%= @contentful_layout[0].social_media.facebook %>><i class="fa fa-facebook"></i></a></li>
-                  <li><a href=<%= @contentful_layout[0].social_media.twitter %>><i class="fa fa-twitter"></i></a></li>
-                  <li><a href=<%= @contentful_layout[0].social_media.youtube %>><i class="fa fa-youtube"></i></a></li>
-                  <li><a href=<%= @contentful_layout[0].social_media.instagram %>><i class="fa fa-instagram"></i></a></li>
+                  <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'facebook') %>><i class="fa fa-facebook"></i></a></li>
+                  <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'twitter') %>><i class="fa fa-twitter"></i></a></li>
+                  <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'youtube') %>><i class="fa fa-youtube"></i></a></li>
+                  <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'instagram') %>><i class="fa fa-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="row">
               <div class="col-md-12 xs-text-center">
                 <!-- #TODO insert into contentful layout -->
-                <h2 class="font-28"><%= @contentful_layout[0].content.blog_title %></h2>
+                <h2 class="font-28"><%= @layout_data.json.dig('custom_json', 'fields', 'content', 'blogTitle') %></h2>
               </div>
             </div>
           </div>
@@ -146,15 +146,15 @@
           <div class="col-sm-6 col-md-3">
             <!-- TODO To include logo into contentful model -->
             <div class="widget dark"> <%= image_tag 'logo-wide-white.png' %>
-              <p class="font-12 mt-20 mb-10"><%= @contentful_layout[0].content.summary %></p>
+              <p class="font-12 mt-20 mb-10"><%= @layout_data.json.dig('custom_json', 'fields', 'content', 'summary') %></p>
               <!-- TODO Link Read More to a Page -->
               <a class="text-gray font-12" href="#"><i class="fa fa-angle-double-right text-theme-colored"></i> Leia mais</a>
               <ul class="social-icons icon-dark mt-20">
-                <li><a href=<%= @contentful_layout[0].social_media.facebook %> data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.twitter %> data-bg-color="#02B0E8"><i class="fa fa-twitter"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].contacts.skype %> data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.instagram %> data-bg-color="#A11312"><i class="fa fa-instagram"></i></a></li>
-                <li><a href=<%= @contentful_layout[0].social_media.youtube %> data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
+                <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'facebook') %> data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
+                <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'twitter') %> data-bg-color="#02B0E8"><i class="fa fa-twitter"></i></a></li>
+                <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'contacts', 'skype') %> data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
+                <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'instagram') %> data-bg-color="#A11312"><i class="fa fa-instagram"></i></a></li>
+                <li><a href=<%= @layout_data.json.dig('custom_json', 'fields', 'socialMedia', 'youtube') %> data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
               </ul>
             </div>
           </div>
@@ -162,8 +162,8 @@
             <div class="widget dark">
               <h5 class="widget-title line-bottom">Links Principais</h5>
               <ul class="list-border list theme-colored angle-double-right">
-                <% @contentful_layout[0].footer_main_links.each do |page| %>
-                <li><a href=<%= page.slug %>><%= page.title %></a></li>
+                <% @layout_data.json.dig('custom_json', 'fields', 'content', 'footerQuickLinks').each do |page| %>
+                <li><a href=<%= page['slug'] %>><%= page['title'] %></a></li>
                 <% end %>
               </ul>
             </div>
@@ -172,9 +172,9 @@
             <div class="widget dark">
               <h5 class="widget-title line-bottom">Contato</h5>
               <ul class="list list-border">
-                <li><a href="#"><%= @contentful_layout[0].contacts.phone1 %></a></li>
-                <li><a href="#"><%= @contentful_layout[0].contacts.email1 %></a></li>
-                <li><a href="#" class="lineheight-20"><%= @contentful_layout[0].contacts.address %></a></li>
+                <li><a href="#"><%= @layout_data.json.dig('custom_json', 'fields', 'contacts', 'phone1') %></a></li>
+                <li><a href="#"><%= @layout_data.json.dig('custom_json', 'fields', 'contacts', 'email') %></a></li>
+                <li><a href="#" class="lineheight-20"><%= @layout_data.json.dig('custom_json', 'fields', 'contacts', 'address') %></a></li>
                 <%= render 'layouts/subscribe' %>
               </ul>
             </div>
@@ -184,7 +184,7 @@
       <div class="footer-nav bg-black-222 p-20">
         <div class="row text-center">
           <div class="col-md-12">
-            <p class="text-white font-11 m-0"><%= @contentful_layout[0].content.copyright %></p>
+            <p class="text-white font-11 m-0"><%= @layout_data.json.dig('custom_json', 'fields', 'content', 'copyright') %></p>
           </div>
         </div>
       </div>
