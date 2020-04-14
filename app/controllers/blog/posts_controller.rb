@@ -1,7 +1,5 @@
 # frozen_string_literal: true
-
 class Blog::PostsController < ApplicationController
-  layout "blog"
   before_action :set_post, only: [:show]
   before_action :related_posts, only: [:show]
   #TODO DRY contentful_layout method. Research about rails layout method

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
-
 class Blog::BlogPagesController < ApplicationController
-  layout "blog"
   before_action do
     contentful_layout("Blog Standard Layout")
   end

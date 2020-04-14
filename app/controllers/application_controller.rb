@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
+  layout :determine_layout
   require "contentful"
 
   def contentful
@@ -12,6 +12,11 @@ class ApplicationController < ActionController::Base
 
   def layout_data(layout)
     @layout_data = Layout.find_by(name: layout)
-    binding.pry
+  end
+
+  private
+
+  def determine_layout
+    params[:subdomain]
   end
 end
