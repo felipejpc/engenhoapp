@@ -3,10 +3,10 @@
   <div class="latest-posts">
     <% @related_posts.each do |post| %>
     <article class="post media-post clearfix pb-0 mb-10">
-      <a class="post-thumb" href=<%= "/posts/#{post.slug}" %>><img src=<%= post.thumb_image %> alt=""></a>
+      <a class="post-thumb" href=<%= "/posts/#{post.slug}" %>><img src=<%= post.json.dig('custom_json', 'fields', 'thumbImage', 'file', 'url') %> alt=""></a>
       <div class="post-right">
-        <h5 class="post-title mt-0"><%= link_to post.title, "/posts/#{post.slug}" %></h5>
-        <p><%= "#{post.description[0, 60]}[...]" %></p>
+        <h5 class="post-title mt-0"><%= link_to post.json.dig('custom_json', 'fields', 'title'), "/posts/#{post.slug}" %></h5>
+        <p><%= "#{post.json.dig('custom_json', 'fields', 'description')[0, 60]}[...]" %></p>
       </div>
     </article>
     <% end %>

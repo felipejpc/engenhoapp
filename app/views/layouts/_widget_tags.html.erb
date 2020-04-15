@@ -2,7 +2,7 @@
   <h5 class="widget-title line-bottom">Tags</h5>
   <div class="tags">
     <% @all_post_tags.each do |post_tag| %>
-        <a href="/posts?tag=<%=post_tag.tag%>"><%= post_tag.tag %></a>
+        <a href="/posts?tag=<%=post_tag.tag_name%>"><%= post_tag.tag_name %></a>
     <% end %>
   </div>
 </div>

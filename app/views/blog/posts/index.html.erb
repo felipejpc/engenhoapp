@@ -6,8 +6,8 @@
 <div class="blog-posts">
   <div class="col-md-12">
     <div class="row list-dashed">
-      <% unless @contentful_posts.nil? %>
-      <% @contentful_posts.each do |post| %>
+      <% unless @posts.nil? %>
+      <% @posts.each do |post| %>
           <% case post.post_type.content_type.id %>
           <% when 'galeryPost' %>
               <article class="post clearfix mb-50 pb-30">

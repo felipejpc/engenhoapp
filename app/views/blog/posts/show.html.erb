@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="entry-title pt-0">
-      <h3><%= @contentful_post.title %></h3>
+      <h3><%= @post.json.dig('custom_json', 'fields', 'title') %></h3>
     </div>
     <div class="entry-meta">
       <ul class="list-inline">
@@ -25,11 +25,11 @@
       </ul>
     </div>
     <div class="entry-content mt-10">
-      <%= @contentful_post.post_type.body %>
+      <%= @post.json.dig('custom_json', 'fields', 'body') %>
       <div class="mt-30 mb-0">
         <h5 class="pull-left mt-10 mr-20 text-theme-colored">Share:</h5>
         <ul class="social-icons icon-circled m-0">
-          <%= social_share_button_tag(@contentful_post.title) %>
+          <%= social_share_button_tag(@post.json.dig('custom_json', 'fields', 'title')) %>
         </ul>
       </div>
     </div>
@@ -71,7 +71,7 @@
 
     var disqus_config = function () {
       this.page.url = <%= request.original_url %>;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = <%= @contentful_post.slug %>; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.identifier = <%= @post.json.dig('custom_json', 'fields', 'slug') %>; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
