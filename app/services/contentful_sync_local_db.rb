@@ -53,7 +53,8 @@ class ContentfulSyncLocalDb
 
     blog_pages = @@client_raw_mode.entries(content_type: "blogPage", include: 2).load_json.deep_symbolize_keys
     blog_pages[:items].each do |page|
-      Blog::BlogPage.create(slug: page[:fields][:slug], contentful_id: page[:sys][:id])
+      Blog::BlogPage.create(slug: page[:fields][:slug], contentful_id: page[:sys][:id],
+                            json: ContentfulCustomJson.new(page, blog_pages[:includes]))
     end
 
     layouts = @@client_raw_mode.entries(content_type: "blogLayout", include: 2).load_json.deep_symbolize_keys

@@ -6,24 +6,22 @@ class ContentfulCustomJson
   end
 
   def convert_to_custom_json(hash_fields, hash_includes)
-    @parsed_json = Hash.new
-    @parsed_json[:content_type_id] = hash_fields[:sys][:contentType][:sys][:id]
-    @parsed_json[:contentful_id] = hash_fields[:sys][:id]
-    @parsed_json[:fields] = {}
-    parse_fields(hash_fields[:fields], @parsed_json[:fields], hash_includes)
+    parsed_json = Hash.new
+    parsed_json[:content_type_id] = hash_fields[:sys][:contentType][:sys][:id]
+    parsed_json[:contentful_id] = hash_fields[:sys][:id]
+    parsed_json[:fields] = {}
+    parse_fields(hash_fields[:fields], parsed_json[:fields], hash_includes)
 
-    return @parsed_json
+    return parsed_json
   end
 
   def parse_fields(hash_with_fields, parent_hash, hash_with_includes)
     hash_with_fields.each do |k, v|
       case v.class.to_s
         when 'Array'
-          #binding.pry
           parent_hash[k] = []
           v.each do |array_item|
             hash_item = Hash.new
-
             if array_item.dig(:sys, :linkType) == "Entry"
               #find_included entry
               hash_with_includes[:Entry].each do |entry|
@@ -55,6 +53,8 @@ class ContentfulCustomJson
             hash_with_includes[:Entry].each do |entry|
               if entry.dig(:sys, :id) == hash_with_fields[k].dig(:sys, :id)
                 parent_hash[k] = Hash.new
+                parent_hash[k][:id] = entry[:sys][:id]
+                parent_hash[k][:content_type_id] = entry[:sys][:contentType][:sys][:id]
                 parse_fields(entry[:fields], parent_hash[k], hash_with_includes)
                 break
               end
@@ -64,7 +64,11 @@ class ContentfulCustomJson
             hash_with_includes[:Asset].each do |asset|
               if asset.dig(:sys, :id) == hash_with_fields[k].dig(:sys, :id)
                 parent_hash[k] = Hash.new
+                #binding.pry
+                #parent_hash[k][:id] = asset[:sys][:id]
+                #parent_hash[k][:content_type_id] = asset[:sys][:contentType][:sys][:id]
                 parse_fields(asset[:fields], parent_hash[k], hash_with_includes)
+                #binding.pry
                 break
               end
             end
