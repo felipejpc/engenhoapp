@@ -54,6 +54,7 @@ class ContentfulCustomJson
               if entry.dig(:sys, :id) == hash_with_fields[k].dig(:sys, :id)
                 parent_hash[k] = Hash.new
                 parent_hash[k][:id] = entry[:sys][:id]
+                parent_hash[k][:type] = entry[:sys][:type]
                 parent_hash[k][:content_type_id] = entry[:sys][:contentType][:sys][:id]
                 parse_fields(entry[:fields], parent_hash[k], hash_with_includes)
                 break
@@ -64,11 +65,9 @@ class ContentfulCustomJson
             hash_with_includes[:Asset].each do |asset|
               if asset.dig(:sys, :id) == hash_with_fields[k].dig(:sys, :id)
                 parent_hash[k] = Hash.new
-                #binding.pry
-                #parent_hash[k][:id] = asset[:sys][:id]
-                #parent_hash[k][:content_type_id] = asset[:sys][:contentType][:sys][:id]
+                parent_hash[k][:id] = asset[:sys][:id]
+                parent_hash[k][:type] = asset[:sys][:type]
                 parse_fields(asset[:fields], parent_hash[k], hash_with_includes)
-                #binding.pry
                 break
               end
             end
