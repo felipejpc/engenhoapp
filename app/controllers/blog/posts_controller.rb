@@ -20,7 +20,6 @@ class Blog::PostsController < ApplicationController
       @posts = Blog::Category.find_by(name: params[:category]).posts
     else
       @posts = Blog::Post.all
-      binding.pry
     end
   end
 
