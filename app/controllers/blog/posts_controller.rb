@@ -15,11 +15,11 @@ class Blog::PostsController < ApplicationController
   def index
     # TODO Refator method without ifs
     if params.key? :tag
-      @posts = Blog::Post.joins(:tags).where(tags: {tag_name: params[:tag]})
+      @posts = Blog::Post.joins(:tags).where(tags: {tag_name: params[:tag]}).page params[:page]
     elsif params.key? :category
-      @posts = Blog::Category.find_by(name: params[:category]).posts
+      @posts = Blog::Category.find_by(name: params[:category]).posts.page params[:page]
     else
-      @posts = Blog::Post.all
+      @posts = Blog::Post.all.page params[:page]
     end
   end
 
