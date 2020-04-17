@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::Base
   layout :determine_layout
-
+  # TODO Refactor - create instace variable for all contentful linked items
   def layout_data(layout)
     @layout_data = Layout.find_by(name: layout)
+    @menu_items = @layout_data.json['custom_json']['fields']['menuItems']
   end
 
   def all_tags
