@@ -42,6 +42,8 @@ group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   # Runtime developer console
   gem "pry", "~> 0.12.2"
+  gem 'pry-rails'
+  gem 'pry-doc'
   # Adds step-by-step debugging and stack navigation capabilities to pry using byebug.
   gem "pry-byebug"
   # Static code analyzer and code formatter. Out of the box it will enforce many of the guidelines outlined in the
@@ -49,6 +51,8 @@ group :development, :test do
   gem "rubocop", require: false
   # A RuboCop extension focused on enforcing Ruby and Rails best practices and coding conventions.
   gem "rubocop-rails", require: false
+  # Ruby library that pretty prints Ruby objects in full color exposing their internal structure with proper indentation
+  gem 'awesome_print'
 end
 
 group :development do
