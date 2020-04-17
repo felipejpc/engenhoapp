@@ -4,28 +4,25 @@
   <article class="post clearfix mb-0">
     <div class="entry-header">
       <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
-      <div class="entry-meta meta-absolute text-center pl-15 pr-15">
-        <div class="display-table">
-          <div class="display-table-cell">
-            <ul>
-              <li><a class="text-white" href="#"><i class="text-white fa fa-thumbs-o-up"></i> 265 <br> Likes</a></li>
-              <li class="mt-20"><a class="text-white" href="#"><i class="text-white fa fa-comments-o"></i> 72 <br> comments</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="entry-title pt-0">
       <h3><%= @post.json.dig('custom_json', 'fields', 'title') %></h3>
     </div>
     <div class="entry-meta">
       <ul class="list-inline">
-        <li>Posted: <span class="text-theme-colored">26 Oct 2015</span></li>
-        <li>By: <span class="text-theme-colored">Admin</span></li>
+        <li>Posted: <span class="text-theme-colored"><!-- #TODO Convert to user date format -->
+            <%= @post.json.dig('custom_json', 'fields', 'publishDate')[0..9] %></span>
+        </li>
+        <li>By:
+          <% @post.json.dig('custom_json', 'fields', 'authors').each do |author| %>
+              <!-- Adjust authors href -->
+              <span class="text-theme-colored"><a href= "" class="text-theme-colored"><%= author['name'] %> |</a></span>
+          <% end %>
+        </li>
       </ul>
     </div>
     <div class="entry-content mt-10">
-      <%= @post.json.dig('custom_json', 'fields', 'body') %>
+      <%= @post.json.dig('custom_json', 'fields', 'postType', 'body') %>
       <div class="mt-30 mb-0">
         <h5 class="pull-left mt-10 mr-20 text-theme-colored">Share:</h5>
         <ul class="social-icons icon-circled m-0">
@@ -38,12 +35,11 @@
     <div class="row">
       <div class="col-md-8">
         <div class="tags">
-          <p class="mb-0"><i class="fa fa-tags text-theme-colored"></i> <span>Tags:</span> Law, Juggement, lawyer, Cases</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="share text-right">
-          <p><i class="fa fa-share-alt text-theme-colored"></i> Share</p>
+          <p class="mb-0"><i class="fa fa-tags text-theme-colored"></i> <span>Tags:</span>
+            <% @post.json.dig('custom_json', 'fields', 'tags').each do |post_tag| %>
+                <a href="/posts?tag=<%=post_tag['tag']%>"><%= post_tag['tag'] %></a>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
