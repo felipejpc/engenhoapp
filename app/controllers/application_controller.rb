@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   # TODO: Load highlight post into db
   def highlighted_posts
-    @highlighted_posts = Blog::Post.limit(4)
+    @highlighted_posts = Blog::Post.where(highlighted: true)
   end
 
   # TODO: Order by popularity (higher view counts)

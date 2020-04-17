@@ -51,6 +51,14 @@ class ContentfulSyncLocalDb
       end
     end
 
+    highlighted_posts = @@client_raw_mode.entries(content_type: "highlightedPosts", include: 5).load_json.deep_symbolize_keys
+    highlighted_posts[:items].each do |item|
+      item[:fields][:posts].each do |highlighted_post|
+        post = Blog::Post.find_by(contentful_id: highlighted_post[:sys][:id])
+        post.update(highlighted: true)
+        end
+    end
+
     blog_pages = @@client_raw_mode.entries(content_type: "blogPage", include: 5).load_json.deep_symbolize_keys
     blog_pages[:items].each do |page|
       Blog::BlogPage.create(slug: page[:fields][:slug], contentful_id: page[:sys][:id],

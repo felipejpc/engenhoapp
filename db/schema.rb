@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_105137) do
+ActiveRecord::Schema.define(version: 2020_04_17_134556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blog_pages", force: :cascade do |t|
+    t.string "contentful_id"
+    t.string "title"
+    t.string "slug"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+    t.index ["contentful_id"], name: "index_blog_pages_on_contentful_id", unique: true
+    t.index ["slug"], name: "index_blog_pages_on_slug", unique: true
+    t.index ["type"], name: "index_blog_pages_on_type"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "contentful_id"
@@ -53,8 +66,10 @@ ActiveRecord::Schema.define(version: 2020_04_14_105137) do
     t.bigint "category_id", null: false
     t.integer "views"
     t.jsonb "json", default: "{}", null: false
+    t.boolean "highlighted", default: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["contentful_id"], name: "index_posts_on_contentful_id", unique: true
+    t.index ["highlighted"], name: "index_posts_on_highlighted"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
