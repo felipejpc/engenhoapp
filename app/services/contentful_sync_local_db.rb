@@ -29,17 +29,17 @@ class ContentfulSyncLocalDb
     Page.delete_all
     Layout.delete_all
 
-    tags = @@client.entries(content_type: "postTag", include: 2)
+    tags = @@client.entries(content_type: "postTag", include: 5)
     tags.each do |tag|
       Blog::Tag.new(contentful_id: tag.id, tag_name: tag.tag).save
     end
 
-    categories = @@client.entries(content_type: "postCategory", include: 2)
+    categories = @@client.entries(content_type: "postCategory", include: 5)
     categories.each do |category|
       Blog::Category.new(contentful_id: category.id, name: category.name).save
     end
 
-    posts = @@client_raw_mode.entries(content_type: "blogPost", include: 2).load_json.deep_symbolize_keys
+    posts = @@client_raw_mode.entries(content_type: "blogPost", include: 5).load_json.deep_symbolize_keys
     posts[:items].each do |post|
       post_json = ContentfulCustomJson.new(post, posts[:includes])
       post_category = Blog::Category.find_by(contentful_id: post[:fields][:category][:sys][:id])
@@ -51,13 +51,13 @@ class ContentfulSyncLocalDb
       end
     end
 
-    blog_pages = @@client_raw_mode.entries(content_type: "blogPage", include: 2).load_json.deep_symbolize_keys
+    blog_pages = @@client_raw_mode.entries(content_type: "blogPage", include: 5).load_json.deep_symbolize_keys
     blog_pages[:items].each do |page|
       Blog::BlogPage.create(slug: page[:fields][:slug], contentful_id: page[:sys][:id],
                             json: ContentfulCustomJson.new(page, blog_pages[:includes]))
     end
 
-    layouts = @@client_raw_mode.entries(content_type: "blogLayout", include: 2).load_json.deep_symbolize_keys
+    layouts = @@client_raw_mode.entries(content_type: "blogLayout", include: 5).load_json.deep_symbolize_keys
     layouts[:items].each do |layout|
       Layout.create(name: layout[:fields][:name], contentful_id: layout[:sys][:id],
                     json: ContentfulCustomJson.new(layout, layouts[:includes]))
