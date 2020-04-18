@@ -2,9 +2,28 @@
 <%= javascript_include_tag 'https://cse.google.com/cse.js?cx=010039346642802683348:p94e0yp2jk9' %>
 <div class="blog-posts single-post">
   <article class="post clearfix mb-0">
-    <div class="entry-header">
-      <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
-    </div>
+    <% case @post.json.dig('custom_json', 'fields', 'postType', 'content_type_id') %>
+    <% when 'imagesCarouselPost' %>
+      <div class="entry-header">
+        <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
+      </div>
+    <% when 'quotationPost' %>
+      <div class="entry-header">
+        <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
+      </div>
+    <% when 'singleImagePost' %>
+      <div class="entry-header">
+        <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
+      </div>
+    <% when 'soundPost' %>
+      <div class="entry-header">
+        <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
+      </div>
+    <% when 'videoPost' %>
+      <div class="entry-header">
+        <div class="post-thumb thumb"> <img src="http://placehold.it/730x400" alt="" class="img-responsive img-fullwidth"> </div>
+      </div>
+    <% end %>
     <div class="entry-title pt-0">
       <h3><%= @post.json.dig('custom_json', 'fields', 'title') %></h3>
     </div>
@@ -22,7 +41,7 @@
       </ul>
     </div>
     <div class="entry-content mt-10">
-      <%= @post.json.dig('custom_json', 'fields', 'postType', 'body') %>
+      <%= rich_text_render(@post.json.dig('custom_json', 'fields', 'postType', 'body')).html_safe %>
       <div class="mt-30 mb-0">
         <h5 class="pull-left mt-10 mr-20 text-theme-colored">Share:</h5>
         <ul class="social-icons icon-circled m-0">
@@ -37,27 +56,28 @@
         <div class="tags">
           <p class="mb-0"><i class="fa fa-tags text-theme-colored"></i> <span>Tags:</span>
             <% @post.json.dig('custom_json', 'fields', 'tags').each do |post_tag| %>
-                <a href="/posts?tag=<%=post_tag['tag']%>"><%= post_tag['tag'] %></a>
+                <a href="/posts?tag=<%=post_tag['tag']%>">#<%= post_tag['tag'] %></a>
             <% end %>
           </p>
         </div>
       </div>
     </div>
   </div>
+  <% @post.json.dig('custom_json', 'fields', 'authors').each do |author| %>
   <div class="author-details media-post">
-    <a href="#" class="post-thumb mb-0"><img class="img-thumbnail" alt="" src="http://placehold.it/125x148"></a>
+    <a href="#" class="post-thumb mb-0"><img class="img-thumbnail" alt="" height="148" width="125" src=<%= author['image']['file']['url'] %>></a>
     <div class="post-right">
-      <h5 class="post-title mt-0 mb-0"><a href="#" class="font-18">John Doe</a></h5>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h5 class="post-title mt-0 mb-0"><a href="#" class="font-18"><%= author['name'] %></a></h5>
+      <p><%= author['shortBio'] %></p>
       <ul class="social-icons square-sm m-0">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href=<%= author['facebook'] %>><i class="fa fa-facebook"></i></a></li>
+        <li><a href=<%= author['twitter'] %>><i class="fa fa-twitter"></i></a></li>
+        <li><a href=<%= author['email'] %>><i class="fa fa-google-plus"></i></a></li>
       </ul>
     </div>
     <div class="clearfix"></div>
   </div>
-
+  <% end %>
   <div id="disqus_thread"></div>
   <!-- Disqus comments area -->
   <script>

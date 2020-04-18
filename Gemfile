@@ -34,6 +34,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 # Platform to control content from a single hub and CMS.
 gem "contentful"
+gem "rich_text_renderer"
 # Quickly create a share feature in you Rails apps. https://github.com/huacnlee/social-share-button
 gem "social-share-button"
 

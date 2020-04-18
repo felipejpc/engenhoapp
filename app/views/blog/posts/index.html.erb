@@ -60,7 +60,7 @@
               <div class="">
                 <blockquote class="gray">
                   <!-- #TODO fix markdown content -->
-                  <p><%= post.json.dig('custom_json', 'fields', 'postType', 'body') %></p>
+                  <p><%= post.json.dig('custom_json', 'fields', 'description') %></p>
                   <footer><%= post.json.dig('custom_json', 'fields', 'postType', 'source')%> </footer>
                 </blockquote>
               </div>

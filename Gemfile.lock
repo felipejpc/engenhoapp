@@ -199,6 +199,7 @@ GEM
       ffi (~> 1.0)
     regexp_parser (1.7.0)
     rexml (3.2.4)
+    rich_text_renderer (0.2.2)
     rubocop (0.81.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -288,6 +289,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
+  rich_text_renderer
   rubocop
   rubocop-rails
   sass-rails (>= 6)
