@@ -114,6 +114,21 @@
         </div>
       </section>
       <% end %>
+      <% if params[:controller] == "blog/blog_pages" %>
+      <!-- Section: inner-header -->
+      <section class="inner-header bg-black-222">
+        <div class="container pt-10 pb-10">
+          <!-- Section Content -->
+          <div class="section-content">
+            <div class="row">
+              <div class="col-sm-8 xs-text-center">
+                <h3 class="text-white mt-10"><%= @page.json.dig('custom_json', 'fields', 'title') %></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <% end %>
       <section>
         <div class="container mt-30 mb-30 pt-30 pb-30">
           <div class="row ">
