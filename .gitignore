@@ -35,3 +35,6 @@ yarn-debug.log*
 
 # Ignore rubocop_todo
 .rubocop_todo.yml
+
+# Ignore all simplecov coverage files.
+/coverage/*

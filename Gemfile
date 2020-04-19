@@ -54,6 +54,11 @@ group :development, :test do
   gem "rubocop-rails", require: false
   # Ruby library that pretty prints Ruby objects in full color exposing their internal structure with proper indentation
   gem 'awesome_print'
+  # Testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
+  gem 'rspec-rails', '~> 4.0.0'
+  # Fixtures replacement with a straightforward definition syntax, multiple build strategies, unsaved instances,
+  # attribute hashes, and stubbed objects, multiple factories for the same class and factory inheritance.
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -71,6 +76,10 @@ group :test do
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
+  # Code coverage analysis tool for Ruby
+  gem 'simplecov', require: false
+  # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
+  gem 'shoulda-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
