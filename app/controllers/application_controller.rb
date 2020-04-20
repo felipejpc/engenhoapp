@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     @all_post_tags = Blog::Tag.all
   end
 
-  # TODO: Load highlight post into db
+  # TODO: delegate to Blog:Post
   def highlighted_posts
     @highlighted_posts = Blog::Post.where(highlighted: true)
   end
