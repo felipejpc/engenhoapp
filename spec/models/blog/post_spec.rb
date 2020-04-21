@@ -3,9 +3,14 @@ require "rails_helper"
 describe Blog::Post do
   subject { build(:post) }
 
+  it "has a valid factory" do
+    expect(create(:post)).to be_valid
+  end
+
   describe "validations" do
     it { should validate_presence_of(:slug) }
     it { should validate_presence_of(:contentful_id) }
+    it { should validate_presence_of(:json) }
     it { should have_db_index(:slug) }
     it { should have_db_index(:contentful_id) }
     it { should have_db_index(:highlighted) }
@@ -17,7 +22,7 @@ describe Blog::Post do
 
   describe "#json" do
     context "when json is not valid" do
-      it "include a error message" do
+      it "includes a error message" do
         subject.json = {"other_json_format"=> {} }
         subject.valid?
 
@@ -35,8 +40,9 @@ describe Blog::Post do
   end
 
   describe "#increment_views" do
-    context "when there are no views" do
+    context "when there are no views (views = nil)" do
       it "returns one views count" do
+        subject.views = nil
         subject.increment_views
 
         expect(subject.views).to eq(1)
@@ -44,8 +50,8 @@ describe Blog::Post do
     end
 
     context "when there are one or more views" do
-      it "increment view count by one" do
-        subject.update(views: 5)
+      it "increments view count by one" do
+        subject.views = 5
         subject.increment_views
 
         expect(subject.views).to eq(6)

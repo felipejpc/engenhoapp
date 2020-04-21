@@ -1,9 +1,11 @@
 require "rails_helper"
 
 describe Blog::Tag do
-  describe "validations" do
-    subject { build(:tag) }
+  it "has a valid factory" do
+    expect(create(:tag)).to be_valid
+  end
 
+  describe "validations" do
     it { should validate_presence_of(:contentful_id) }
     it { should validate_presence_of(:tag_name) }
     it { should have_db_index(:contentful_id) }

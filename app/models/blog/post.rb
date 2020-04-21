@@ -4,7 +4,7 @@ class Blog::Post < ApplicationRecord
   has_and_belongs_to_many :tags
   belongs_to :category
 
-  validates_presence_of :slug, :contentful_id
+  validates_presence_of :slug, :contentful_id, :json
   validates :slug, :contentful_id, uniqueness: true
   validate :json_is_a_custom_json_format
 
@@ -17,8 +17,10 @@ class Blog::Post < ApplicationRecord
   private
 
   def json_is_a_custom_json_format
-    if json.keys != ["custom_json"]
-      errors.add(:json, 'Must be a custom_json format. Use ContentfulCustomJson class to format json correctly')
+    unless json.nil?
+      if json.keys != ["custom_json"]
+        errors.add(:json, 'Must be a custom_json format. Use ContentfulCustomJson class to format json correctly')
+      end
     end
   end
 end
